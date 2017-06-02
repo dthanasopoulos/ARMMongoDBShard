@@ -6,8 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
- azuredeploy.json
- azuredeploy.parameters.json
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -252,3 +251,8 @@ paket-files/
 # JetBrains Rider 
 .idea/
 *.sln.iml
+
+
+
+azuredeploy.json
+azuredeploy.parameters.json
