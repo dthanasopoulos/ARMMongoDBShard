@@ -32,14 +32,14 @@
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
     <None Include="metadata.json" />
-    <None Include="nested\config-primary-resources2.json" />
-    <None Include="nested\config-secondary-resources2.json" />
+    <None Include="nested\config-primary-resources.json" />
+    <None Include="nested\config-secondary-resources.json" />
     <None Include="nested\disksSelector.json" />
-    <None Include="nested\replica-primary-resources2.json" />
-    <None Include="nested\replica-secondary-resources2.json" />
-    <None Include="nested\router1-resources2.json" />
-    <None Include="nested\router2-resources2.json" />
-    <None Include="nested\shared-resources2.json" />
+    <None Include="nested\replica-primary-resources.json" />
+    <None Include="nested\replica-secondary-resources.json" />
+    <None Include="nested\router1-resources.json" />
+    <None Include="nested\router2-resources.json" />
+    <None Include="nested\shared-resources.json" />
     <None Include="README.md" />
     <None Include="scripts\config_primary.sh" />
     <None Include="scripts\config_secondary.sh" />
