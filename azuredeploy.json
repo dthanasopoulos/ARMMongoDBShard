@@ -172,7 +172,8 @@
     }
   },
   "variables": {
-    "baseUrl": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-sharding-centos/",
+    "baseUrl": "https://raw.githubusercontent.com/dthanasopoulos/ARMMongoDBShard/master/",
+
     "baseChinaUrl": "http://msmirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-sharding-centos/",
     "environmentAzureCloud": {
       "serviceEndPoint": "core.windows.net",
@@ -302,12 +303,32 @@
     }
   },
   "resources": [
-    
+    {
+      "name": "shared",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "[variables('apiVersion')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('sharedTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "networkSettings": {
+            "value": "[variables('networkSettings')]"
+          },
+          "namespace": {
+            "value": "[variables('namespace')]"
+          }
+        }
+      }
+    },
+
     {
       "name": "configSecondaryNode1",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-     
+
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -349,7 +370,7 @@
       "name": "configSecondaryNode2",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'configSecondaryNode1')]"
       ],
       "properties": {
@@ -393,7 +414,7 @@
       "name": "configPrimaryNode",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'configSecondaryNode2')]"
       ],
       "properties": {
@@ -443,7 +464,7 @@
       "name": "[concat('aReplicaSecondaryNode', '0')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-       
+
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -497,7 +518,7 @@
       "name": "[concat('aReplicaSecondaryNode', '1')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'aReplicaSecondaryNode0')]"
       ],
       "properties": {
@@ -553,7 +574,7 @@
       "name": "aReplicaPrimaryNode",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'aReplicaSecondaryNode1')]"
       ],
       "properties": {
@@ -618,7 +639,7 @@
       "name": "[concat('bReplicaSecondaryNode', '0')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'aReplicaPrimaryNode')]"
       ],
       "properties": {
@@ -674,7 +695,7 @@
       "name": "[concat('bReplicaSecondaryNode', '1')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'bReplicaSecondaryNode0')]"
       ],
       "properties": {
@@ -730,7 +751,7 @@
       "name": "bReplicaPrimaryNode",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'bReplicaSecondaryNode1')]"
       ],
       "properties": {
@@ -795,7 +816,7 @@
       "name": "routerNode1",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'configPrimaryNode')]",
         "[concat('Microsoft.Resources/deployments/', 'bReplicaPrimaryNode')]"
       ],
@@ -849,7 +870,7 @@
       "name": "routerNode2",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [ 
+      "dependsOn": [
         "[concat('Microsoft.Resources/deployments/', 'routerNode1')]"
       ],
       "properties": {
