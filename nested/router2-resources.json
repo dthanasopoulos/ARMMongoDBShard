@@ -34,9 +34,7 @@
     }
   },
   "variables": {
-
-    "vnetID": "[resourceId('CommonDevTest', 'Microsoft.Network/virtualNetworks', parameters('subnet').vnet)]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/', parameters('subnet').name)]",
+    "subnetRef": "[parameters('subnet').id]",
     "apiVersion": "2015-06-15",
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]",
     "securityGroupName": "[concat(parameters('namespace'), parameters('vmbasename'), 'nsg')]"
