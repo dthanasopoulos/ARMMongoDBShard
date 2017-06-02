@@ -1,0 +1,45 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "SignalAdmin"
+    },
+    "adminPassword": {
+      "value": "Signal()"
+    },
+    "mongoAdminUsername": {
+      "value": "mongoadmin"
+    },
+    "mongoAdminPassword": {
+      "value": "pas278a9083eF"
+    },
+    "dnsNamePrefix": {
+      "value": "mongo-dev-db-signal"
+    },
+    "environment": {
+      "value": "AzureCloud"
+    },
+    "numDataDisks": {
+      "value": "4"
+    },
+    "sizeOfDataDiskInGB": {
+      "value": 20
+    },
+    "centOsVersion": {
+        "value": "7.0"
+    },
+    "routerNodeVmSize": {
+      "value": "Standard_DS2_v2"
+    },
+    "configNodeVmSize": {
+      "value": "Standard_DS3_v2"
+    },
+    "replicaNodeVmSize": {
+      "value": "Standard_DS3_v2"
+    },
+    "zabbixServerIPAddress": {
+	  "value": "Null"
+	}
+  }
+}
