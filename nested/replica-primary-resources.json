@@ -11,7 +11,7 @@
     "adminPassword": {
       "type": "securestring"
     },
-	"mongoAdminUsername": {
+    "mongoAdminUsername": {
       "type": "string"
     },
     "mongoAdminPassword": {
@@ -44,11 +44,14 @@
     "subnet": {
       "type": "object"
     },
-	"zabbixServerIPAddress": {
-	  "type": "string"
-	},
+    "zabbixServerIPAddress": {
+      "type": "string"
+    },
     "staticIp": {
       "type": "string"
+    },
+    "sasToken": {
+      "type": "securestring"
     }
   },
   "variables": {
@@ -72,10 +75,10 @@
       "name": "diskSelection", 
       "type": "Microsoft.Resources/deployments", 
       "properties": { 
-        "mode": "Incremental", 
-        "templateLink": { 
-          "uri": "[concat(parameters('templateBaseUrl'), 'disksSelector', '.json')]", 
-            "contentVersion": "1.0.0.0" 
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('templateBaseUrl'), 'disksSelector', '.json' , parameters('sasToken'))]",
+          "contentVersion": "1.0.0.0"
         }, 
         "parameters": { 
           "numDataDisks": { 

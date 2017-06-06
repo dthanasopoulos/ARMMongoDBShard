@@ -35,11 +35,14 @@
     "vmSize": {
       "type": "string"
     },
-	"zabbixServerIPAddress": {
-	  "type": "string"
-	},
+    "zabbixServerIPAddress": {
+      "type": "string"
+    },
     "subnet": {
       "type": "object"
+    },
+    "sasToken": {
+      "type": "securestring"
     }
   },
   "variables": {
@@ -63,10 +66,10 @@
       "name": "diskSelection", 
       "type": "Microsoft.Resources/deployments", 
       "properties": { 
-        "mode": "Incremental", 
-        "templateLink": { 
-          "uri": "[concat(parameters('templateBaseUrl'), 'disksSelector', '.json')]", 
-            "contentVersion": "1.0.0.0" 
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(parameters('templateBaseUrl'), 'disksSelector', '.json', parameters('sasToken'))]",
+          "contentVersion": "1.0.0.0"
         }, 
         "parameters": { 
           "numDataDisks": { 
